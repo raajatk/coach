@@ -5,18 +5,17 @@
 
 var getDbConnection = function () {
     switch (process.env.NODE_ENV) {
-    case 'development':
-      var db = mongoose.connect('mongodb://admin:nodeseed@localhost:27017/mongoseed');
-      return checkMongooseConnection(db)
-     case 'staging':
-       var db = mongoose.connect('mongodb://admin:nodeseed@localhost:27017/mongoseed');
+      case 'development':
+        var db = mongoose.connect('mongodb://usr:passme@localhost:27017/coach');
         return checkMongooseConnection(db)
-    case 'production':
-      var db = mongoose.connect('mongodb://admin:nodeseed@localhost:27017/mongoseed');
-       return checkMongooseConnection(db)
-
+      case 'staging':
+        var db = mongoose.connect('mongodb://usr:passme@localhost:27017/coach');
+        return checkMongooseConnection(db)
+      case 'production':
+        var db = mongoose.connect('mongodb://usr:passme@localhost:27017/coach');
+        return checkMongooseConnection(db)
     case 'test':
-        var db = mongoose.connect('mongodb://admin:nodeseed@localhost:27017/mongoseed');
+        var db = mongoose.connect('mongodb://usr:passme@localhost:27017/coach');
         return checkMongooseConnection(db)
     }
 }

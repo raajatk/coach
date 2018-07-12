@@ -8,47 +8,71 @@
 		required: true,
 		trim: true,
         validate: [stringNotNull, "First name is required."]
-	}, 
-    lastName: {
+	},
+  lastName: {
 		type: String,
 		default: '',
 		required: true,
 		trim: true
 	},
-    email: {
+  email: {
 		type: String,
 		default: '',
 		required: true,
 		trim: true
 	},
-    password: {
+  password: {
 		type: String,
 		default: '',
 		required: true,
 		trim: true
 	},
-    salt:{
-        type:String,
-        default:'',
-        required:true,
-        trim:true
-    },
-    accountLocked:{
-        type:Boolean,
-        default:true,
-        required:true,
-        trim:true
-    },
-    isAccountActive:{
-        type:Boolean,
-        default:false,
-        required:true,
-        trim:true
-    },
-   created: {
-		type: Date,
-		default: Date.now
-	}
+  salt:{
+    type:String,
+    default:'',
+    required:true,
+    trim:true
+  },
+  accountLocked:{
+    type:Boolean,
+    default:true,
+    required:true,
+    trim:true
+  },
+  isAccountActive:{
+    type:Boolean,
+    default:false,
+    required:true,
+    trim:true
+  },
+  created: {
+  	type: Date,
+  	default: Date.now
+  },
+  role:{
+    type:String,
+    required:true,
+    enum:['ROLE_COACH','ROLE_PLAYER']
+  },
+  sports:[{
+    type:String,
+    trim:true
+  }],
+  awardsAndRecognition:[{
+    type:String,
+    required:true,
+    trim:true
+  }],
+  dateOfBirth:{
+    type:Date
+  },
+  city:{
+    type:String,
+    required:true,
+    trim:true,
+    validate:[stringNotNull,'city required']
+  }
+
 });
 
 UserSchema.pre('findOneAndUpdate', function(next) {
