@@ -19,6 +19,7 @@
 		type: String,
 		default: '',
 		required: true,
+    unique:true,
 		trim: true
 	},
   password: {
@@ -60,7 +61,6 @@
   }],
   awardsAndRecognition:[{
     type:String,
-    required:true,
     trim:true
   }],
   dateOfBirth:{
@@ -71,6 +71,11 @@
     required:true,
     trim:true,
     validate:[stringNotNull,'city required']
+  },
+  phone:{
+    type:Number,
+    required:true,
+    unique:true
   }
 
 });

@@ -20,12 +20,15 @@ function createSuperAdmin(){
             var superAdminUser  = new domain.User({
             firstName:'SuperAdmin',
             lastName:'User',
-            email:'admin@nodeseed.com',
+            email:'admin@coach.com',
             salt:saltString,
             password:password,
             role:'ROLE_SUPERADMIN',
             accountLocked:false,
-            isAccountActive : true
+            isAccountActive : true,
+            phone:9999999999,
+            city:'LONDON'
+
     });
 
     superAdminUser.save(function (err,user) {

@@ -3,20 +3,7 @@ module.exports = function () {
 
 
 	var createUser = function (req, res, callback) {
-		var self = this;
-		var salt = uuid.v1();
-		var user = new domain.User(req.body.user);
-		user.salt = salt;
-		user.password = encrypt(salt, user.password);
-		user.validate(function (err) {
-			if (err != null || err == "undefined") {
-				Logger.info(err.errors.stack);
-				err.status = 400;
-				callback(err, user);
-			} else {
-				self.services.userService.createUser(user,callback);
-			}
-		})
+		this.services.userService.createUser(req.body,callback);
 	}
 
 	var getUser = function (req, res, callback) {

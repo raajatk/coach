@@ -1,12 +1,14 @@
 //add Roles in the system
-var roles = ['ROLE_USER', 'ROLE_ADMIN','ROLE_SUPERADMIN']
+var roles = ['ROLE_USER', 'ROLE_ADMIN','ROLE_SUPERADMIN','ROLE_PLAYER','ROLE_COACH']
 
 // Add different accessLevels
 var accessLevels = {
     'anonymous': ['ROLE_USER','ROLE_ADMIN','ROLE_SUPERADMIN'],
     'user': ['ROLE_USER','ROLE_ADMIN','ROLE_SUPERADMIN'],
     'admin': ['ROLE_ADMIN','ROLE_SUPERADMIN'],
-    'superadmin':['ROLE_SUPERADMIN']
+    'superadmin':['ROLE_SUPERADMIN'],
+    'coach':['ROLE_USER','ROLE_ADMIN','ROLE_SUPERADMIN'],
+    'player':['ROLE_USER','ROLE_ADMIN','ROLE_SUPERADMIN']
 }
 
 
@@ -20,9 +22,9 @@ var configVariables = function () {
             awsAccessKeyId:'',
             awsSecretAccessKey:'',
             bucketname:'',
-            emailFrom:'admin@nodeseed.com',
-            emailPassword:'admin@nodeseed',
-            verificationEmailSubject:'This is NodeSeed'
+            emailFrom:'admin@coach.com',
+            emailPassword:'admin@coach',
+            verificationEmailSubject:'This is COACH App'
 
         }
         config.roles = roles

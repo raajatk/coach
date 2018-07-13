@@ -2,11 +2,16 @@
 		var controllers = app.controllers,
 			views = app.views;
 
+			/*
+			The API version is v0
+			/api/v0.0.1/app/
+			*/
+
 		return {
-			"/user": [{
+			"/api/v0.0.1/app/user/create": [{
 					method: "POST",
 					action: controllers.userController.createUser,
-					middleware: ["hello"],
+					middleware: [],
 					views: {
 						json: views.jsonView
 					}

@@ -1,4 +1,5 @@
 var BaseService = require('./BaseService');
+var encrypt = require('../../../application-utilities/EncryptionUtility');
 
 UserService = function (app) {
 	this.app = app;
@@ -6,10 +7,37 @@ UserService = function (app) {
 
 UserService.prototype = new BaseService();
 
-UserService.prototype.createUser = function (user, callback) {
-	user.save(function (err, userObj) {
-		callback(err, userObj);
-	});
+UserService.prototype.createUser = function (body, callback) {
+
+	var salt = uuid.v1();
+	var user = new domain.User(body.user);
+	user.salt = salt;
+	user.password = encrypt(salt, body.user.password);
+	domain.User.find({ $or:[{phone:body.user.phone},{email:body.user.email}]},function(err,users){
+		if(!err && users.length==0){
+			user.validate(function (err) {
+				if (err != null || err == "undefined") {
+					Logger.info(err.errors.stack);
+					err.status = 400;
+					callback(err, user);
+				} else {
+						user.save(function (err, userObj) {
+							console.log("the res is ",err,userObj)
+							callback(err, userObj);
+						});
+				}
+			})
+		}else {
+			var duplicateKey = [];
+			if(users[0].email==body.user.email){
+				duplicateKey.push('email');
+			}
+			if(users[0].phone==body.user.phone){
+				duplicateKey.push('phone');
+			}
+			callback(err,{duplicateKey:duplicateKey})
+		}
+	})
 
 }
 
